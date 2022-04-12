@@ -14,7 +14,8 @@ $ cargo build-bpf
 $ cargo test-bpf
 ```
 
-Goal:
+### Goal:
+```
  - Learn Rust programming and solana account model and core concepts such as:
         + Account model
         + Program Architecture
@@ -22,17 +23,22 @@ Goal:
         + Cross-Program Invocation (CPI)
             . invoke
             . invoke_signed
-Program Architecture:
+```
+### Program Architecture:
+```
     lib.rs : registering modules
     entrypoint.rs : entrypoint to the program
     intruction.rs : program API, (de)serializing instruction data
     processor.rs : program logic
     state.rs : program objects, (de)serializing state
     error.rs : program secific errors
+```
 
-The flow of a program using this structure looks like this:
-    Someone calls the entrypoint
-    The entrypoint forwards the arguments to the processor
-    The processor asks instruction module to decode the instruction_data argument from the entrypoint function.
-    Using the decoded data, the processor will now decide which processing function to use to process the request.
-    The processor may use state module to encode state into or decode the state of an account which has been passed into the entrypoint.
+### The flow of a program using this structure looks like this:
+```
+    1. Someone calls the entrypoint
+    2. The entrypoint forwards the arguments to the processor
+    3. The processor asks instruction module to decode the instruction_data argument from the entrypoint function.
+    4. Using the decoded data, the processor will now decide which processing function to use to process the request.
+    5. The processor may use state module to encode state into or decode the state of an account which has been passed into the entrypoint.
+```

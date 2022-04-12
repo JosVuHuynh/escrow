@@ -8,7 +8,11 @@ pub enum EscrowInstruction {
     InitEscrow {
         // the amount party A expects to recieve of token Y
         amount: u64
-    }
+    },
+
+    Exchange {
+        amount: u64
+    },
 }
 
 impl EscrowInstruction {
@@ -18,8 +22,11 @@ impl EscrowInstruction {
         Ok(match tag {
             0 => Self::InitEscrow {
             amount: Self::unpack_amount(rest)?,
-        },
-        _ => return Err(InvalidInstruction.into()),
+            },
+            1 => Self::Exchange {
+                amount: Self::unpack_amount(rest)?,
+            },
+            _ => return Err(InvalidInstruction.into()),
         })
     }
 
