@@ -29,3 +29,10 @@ Program Architecture:
     processor.rs : program logic
     state.rs : program objects, (de)serializing state
     error.rs : program secific errors
+
+The flow of a program using this structure looks like this:
+    Someone calls the entrypoint
+    The entrypoint forwards the arguments to the processor
+    The processor asks instruction module to decode the instruction_data argument from the entrypoint function.
+    Using the decoded data, the processor will now decide which processing function to use to process the request.
+    The processor may use state module to encode state into or decode the state of an account which has been passed into the entrypoint.
